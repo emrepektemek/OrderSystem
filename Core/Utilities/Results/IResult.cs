@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace Core.Utilities.Results
 {
-    // API'de result dondurecek voidler icin yaptik bu sayede response nesnesini dondurebilecegiz 
     public interface IResult
     {
-        bool Success {  get; }  // sadece okunabilir
+        bool Success {  get; } 
         string Message { get; }
 
     }

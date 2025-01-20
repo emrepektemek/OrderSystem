@@ -8,8 +8,6 @@ namespace Core.Utilities.Results
 {
     public class SuccessResult : Result
     {
-
-        // base  ebevyn class demek ve ona parametre gonderebiliyorsun
         public SuccessResult(string message) : base(true, message) 
         {
 

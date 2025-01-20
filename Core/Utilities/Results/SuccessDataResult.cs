@@ -19,8 +19,6 @@ namespace Core.Utilities.Results
                 
         }
 
-
-        // default calitigin T'nin defaultudur ve default hali dondurulur. bu ve asagidaki cok fazla kullanilmaz fakat alt yapilarda alternatif olarak yazilabilir
         public SuccessDataResult(string message) : base(default,true, message)
         {
 

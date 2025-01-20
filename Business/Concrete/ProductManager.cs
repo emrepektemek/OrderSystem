@@ -86,10 +86,10 @@ namespace Business.Concrete
            
         }
 
-        public IDataResult<List<ProductDetailDto>>  GetProductsDetails()
+       /* public IDataResult<List<ProductDetailDto>>  GetProductsDetails()
         {
             return new SuccessDataResult<List<ProductDetailDto>> (_productDal.GetProductDetails());
-        }
+        }*/
 
         
         [ValidationAspect(typeof(ProductValidator))]
@@ -99,8 +99,6 @@ namespace Business.Concrete
             throw new NotImplementedException();
         }
 
-        /* Bir kategoride en fazla 15 urun olabilir iş kodunu normalde Addm metoduna yazmistik bu SOLID'e aykiri oldugu 
-         * icin bu sekilde is kodunu bir fonksiyon olusturarak yazdik */
         private IResult CheckIfProductCountOfCategoryCorrect(int categoryId)
         {
             var result = _productDal.GetAll(p => p.CategoryId == categoryId).Count;

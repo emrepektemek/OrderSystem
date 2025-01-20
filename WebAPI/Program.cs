@@ -53,12 +53,6 @@ builder.Services.AddDependencyResolvers(new ICoreModule[]
     new CoreModule()
 });
 
-//  bunlar eski kodlar .NET IoC altyapisi kullaniyordik fakat yukarida .NET IoC altyapisi yerine Autofac IoC altyapisi kullan dedik
-
-//builder.Services.AddSingleton<IProductService, ProductManager>();
-
-//builder.Services.AddSingleton<IProductDal, EfProductDal>();
-
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

@@ -11,9 +11,7 @@ namespace DataAccess.Abstract
 {
     public interface IProductDal: IEntityRepository<Product>
     {
-
-        // IProductDal'i hala kullanmamizin sebebi iste burada oldugu gibi tamamen productdal'a ozgu JOIN yazilacak
-        List<ProductDetailDto> GetProductDetails(); 
+       // List<ProductDetailDto> GetProductDetails(); 
         
         
     }

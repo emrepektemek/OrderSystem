@@ -7,13 +7,10 @@ using System.Threading.Tasks;
 
 namespace Entities.Concrete
 {
-    public class Warehouse: AuditBaseEntity 
+    public class Category: AuditBaseEntity
     {
-        public string WarehouseName { get; set; }
-
-        public string Location { get; set; }
-
-        public int Capacity { get; set; }
-
+        public string CategoryName { get; set; }
+        public string Description { get; set; }
+    
     }
 }

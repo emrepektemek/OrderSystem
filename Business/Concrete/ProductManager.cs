@@ -23,27 +23,20 @@ namespace Business.Concrete
     public class ProductManager : IProductService
     {
         IProductDal _productDal;
-
-        ICategoryService _categoryService;
-
-        public ProductManager(IProductDal productDal, ICategoryService categoryService)
+        public ProductManager(IProductDal productDal)
         {
             _productDal = productDal;
-            _categoryService = categoryService; 
+           
         }
-
-        // Cross Cutting Concerns
-
-        //[SecuredOperation("product.add,admin")]
+   
+        //[SecuredOperation("admin")]
         [ValidationAspect(typeof(ProductValidator))]
         [CacheRemoveAspect("IProductService.Get")]
         public IResult Add(Product product)
         {
             // bussiness kurallari
 
-            IResult result =  BusinessRules.Run(CheckIfProductNameExists(product.ProductName), // is motoru ile parametre olarak verdigimiz is kurallarinin calistirilmasi
-                CheckIfProductCountOfCategoryCorrect(product.CategoryId),
-                CheckIfCategoryLimitExceded());
+            IResult result =  BusinessRules.Run(CheckIfProductNameExists(product.ProductName));
 
             if (result != null)
             {
@@ -57,34 +50,17 @@ namespace Business.Concrete
         [CacheAspect]
         public IDataResult<List<Product>> GetAll()
         {
-            /*
-            if(DateTime.Now.Hour == 22)
-            {
-                return new ErrorDataResult<List<Product>>(Messages.MaintenanceTime);
-
-            }*/
 
             return new DataResult<List<Product>>(_productDal.GetAll(), true, Messages.ProductsListed);
 
         }
 
-        public IDataResult<List<Product>> GetAllByCategoryId(int id)
-        {
-            return new SuccessDataResult<List<Product>>(_productDal.GetAll(p => p.CategoryId == id));
-        }
-
         [CacheAspect]
         public IDataResult<Product> GetById(int productId)
         {
-            return new SuccessDataResult<Product>(_productDal.Get(p => p.ProductId == productId));
+            return new SuccessDataResult<Product>(_productDal.Get(p => p.Id == productId));
         }
 
-        public IDataResult<List<Product>> GetAllByUnitPrice(decimal min, decimal max)
-        {
-            return new SuccessDataResult<List<Product>>(_productDal.GetAll(p => p.UnitPrice >= min && p.UnitPrice <= max));
-
-           
-        }
 
        /* public IDataResult<List<ProductDetailDto>>  GetProductsDetails()
         {
@@ -97,18 +73,6 @@ namespace Business.Concrete
         public IResult Update(Product product)
         {
             throw new NotImplementedException();
-        }
-
-        private IResult CheckIfProductCountOfCategoryCorrect(int categoryId)
-        {
-            var result = _productDal.GetAll(p => p.CategoryId == categoryId).Count;
-
-            if (result >= 10)
-            {
-                return new ErrorResult(Messages.ProductCountOfCategoryError);
-            }
-
-            return new SuccessResult();
         }
 
         private IResult CheckIfProductNameExists(string productName)
@@ -124,22 +88,6 @@ namespace Business.Concrete
 
         }
 
-         private IResult CheckIfCategoryLimitExceded()
-        {
-            var result = _categoryService.GetAll();
-
-            if (result.Data.Count>15)
-            {
-                return new ErrorResult(Messages.CategoryLimitExceded);
-            }
-
-            return new SuccessResult();
-
-        }
-
-        public IResult AddTransactionalTest(Product product)
-        {
-            throw new NotImplementedException();
-        }
+    
     }
 }

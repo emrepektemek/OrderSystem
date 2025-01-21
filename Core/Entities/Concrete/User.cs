@@ -8,7 +8,9 @@ namespace Core.Entities.Concrete
 {
     public class User: AuditBaseEntity, IEntity
     {
-        public string FullName { get; set; }
+        public string FirstName { get; set; }
+
+        public string LastName { get; set; }
 
         public string PhoneNumber { get; set; }
 

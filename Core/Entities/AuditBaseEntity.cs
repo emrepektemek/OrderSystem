@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Core.Entities
 {
-    public abstract class AuditBaseEntity
+    public abstract class AuditBaseEntity: IEntity
     {
         public int Id { get; set; }
         public int CreatedUserId { get; set; }
@@ -14,7 +14,7 @@ namespace Core.Entities
         public int LastUpdatedUserId { get; set; }
         public DateTime LastUpdatedDate { get; set; }
         public bool Status { get; set; }
-        public bool isDeleted { get; set; }
+        public bool IsDeleted { get; set; }
 
     }
 

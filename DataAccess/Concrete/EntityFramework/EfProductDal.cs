@@ -12,14 +12,14 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Concrete.EntityFramework
 {
-    public class EfProductDal : EfEntityRepositoryBase<Product, OrderSystem>, IProductDal // Burada yine IProductDal implemente etmemizin sebebi projede gelecekte EntityFramework yerine baska teknolojilere gecebiliriz Busniess katmaninda da IProductDal'a bagimli  
+    public class EfProductDal : EfEntityRepositoryBase<Product, OrderSystemContext>, IProductDal
     {
+        /*
         public List<ProductDetailDto> GetProductDetails()
         {
 
-            // Linq ile JOIN yapabilmek icin tabikide veri tabanina baglanabilmek icin context nesnesi lazim 
 
-            using (OrderSystem context = new OrderSystem())
+            using (OrderSystemContext context = new OrderSystemContext())
             {
 
                 var result = from p in context.Products
@@ -39,6 +39,6 @@ namespace DataAccess.Concrete.EntityFramework
 
 
                 
-        }
+        }*/
     }
 }

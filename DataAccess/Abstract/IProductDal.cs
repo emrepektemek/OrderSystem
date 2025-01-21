@@ -1,5 +1,5 @@
 ﻿using Core.DataAccess;
-using Entities.Concrete; // GetAll metodunda Entitites katmanına ait olan Product'u kullanabilmek içi eklendi
+using Entities.Concrete;
 using Entities.DTOs;
 using System;
 using System.Collections.Generic;
@@ -11,8 +11,6 @@ namespace DataAccess.Abstract
 {
     public interface IProductDal: IEntityRepository<Product>
     {
-       // List<ProductDetailDto> GetProductDetails(); 
-        
-        
+       
     }
 }

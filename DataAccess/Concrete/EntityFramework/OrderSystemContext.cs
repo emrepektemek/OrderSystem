@@ -9,15 +9,14 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Concrete.EntityFramework
 {
-    public class OrderSystem:DbContext
+    public class OrderSystemContext:DbContext
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(@"Server=MSI;Database=OrderSystem;Trusted_Connection=True;TrustServerCertificate=True;");
         }
 
-        public DbSet<Customer> Customers { get; set; }
-
+        public DbSet<Warehouse> Customers { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<Product> Products { get; set; }
 

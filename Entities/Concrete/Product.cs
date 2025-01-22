@@ -9,12 +9,13 @@ namespace Entities.Concrete
 {
     public class Product: AuditBaseEntity
     {
-        public int CategoryId { get; set; }
-        public string ProductName { get; set; }
-        public int? ColorId { get; set; }
-        public int Size { get; set; }
-        public decimal UnitPrice { get; set; }
-        public string Description { get; set; }
+
+        public int CategoryId { get; set; } = 0;
+        public string ProductName { get; set; } = "Product Name";   
+        public int? ColorId { get; set; } = 0;   
+        public int Size { get; set; } = 0;  
+        public decimal UnitPrice { get; set; } = 20;
+        public string Description { get; set; } = "Description";
 
     }
 }

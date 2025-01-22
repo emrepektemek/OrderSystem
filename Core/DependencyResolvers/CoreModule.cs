@@ -17,7 +17,7 @@ namespace Core.DependencyResolvers
         public void Load(IServiceCollection serviceCollection)
         {     
             serviceCollection.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            serviceCollection.AddMemoryCache(); //microsoft'un cache icin otomatik injection'ı
+            serviceCollection.AddMemoryCache();
             serviceCollection.AddSingleton<ICacheManager, MemoryCacheManager>();
         }
     }

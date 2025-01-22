@@ -28,10 +28,11 @@ namespace Business.Concrete
             _productDal = productDal;
            
         }
-   
+
         //[SecuredOperation("admin")]
+        //[CacheRemoveAspect("IProductService.Get")]
+
         [ValidationAspect(typeof(ProductValidator))]
-        [CacheRemoveAspect("IProductService.Get")]
         public IResult Add(Product product)
         {
             // bussiness kurallari
@@ -47,7 +48,7 @@ namespace Business.Concrete
             return new SuccessResult(Messages.ProductAdded);   
         }
 
-        [CacheAspect]
+        //[CacheAspect]
         public IDataResult<List<Product>> GetAll()
         {
 
@@ -62,14 +63,15 @@ namespace Business.Concrete
         }
 
 
-       /* public IDataResult<List<ProductDetailDto>>  GetProductsDetails()
-        {
-            return new SuccessDataResult<List<ProductDetailDto>> (_productDal.GetProductDetails());
-        }*/
+        /* public IDataResult<List<ProductDetailDto>>  GetProductsDetails()
+         {
+             return new SuccessDataResult<List<ProductDetailDto>> (_productDal.GetProductDetails());
+         }*/
 
-        
+
+        //[CacheRemoveAspect("IProductService.Get")]
+
         [ValidationAspect(typeof(ProductValidator))]
-        [CacheRemoveAspect("IProductService.Get")]
         public IResult Update(Product product)
         {
             throw new NotImplementedException();

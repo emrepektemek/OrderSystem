@@ -6,11 +6,11 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.DataAccess // namespace proje adı . klasor varsa adi . klasor varsa adi . klasor varsa adi.   namespaceler standar olarak boyle verilir fakat boyle vermezseniz hata vermez ama duzen olmasi icin boyle olmali
+namespace Core.DataAccess
 {
     public interface IEntityRepository<T> where T : class, IEntity , new()  
     {
-        List<T> GetAll(Expression<Func<T,bool>> filter = null); // filtre = null filtre vermeyebilirsin anlamına geliyor. Bu kodu bir kere yazıyorsun sonra aylarca bakmıyorsun tek sefer yazman yeterli
+        List<T> GetAll(Expression<Func<T,bool>> filter = null);
 
         T Get(Expression<Func<T, bool>> filter);
 

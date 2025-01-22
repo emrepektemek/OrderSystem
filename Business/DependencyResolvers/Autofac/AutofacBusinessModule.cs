@@ -42,7 +42,7 @@ namespace Business.DependencyResolvers.Autofac
             builder.RegisterType<AuthManager>().As<IAuthService>();
             builder.RegisterType<JwtHelper>().As<ITokenHelper>();
 
-            builder.RegisterType<WarhouseManager>().As<IWarehouseService>().SingleInstance();
+            builder.RegisterType<WarehouseManager>().As<IWarehouseService>().SingleInstance();
             builder.RegisterType<EfWarehouseDal>().As<IWarehouseDal>().SingleInstance();
 
 

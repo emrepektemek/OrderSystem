@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Business.Concrete
 {
-    public class WarhouseManager
+    public class WarehouseManager
     {
     }
 }

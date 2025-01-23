@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Entities.Concrete
 {
-    public class Inventory : AuditBaseEntity
+    public class Inventory : AuditBaseEntity, IEntity   
     {
         public int WarehouseId { get; set; }
         public int ProductId { get; set; }

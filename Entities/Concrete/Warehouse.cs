@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Entities.Concrete
 {
-    public class Warehouse: AuditBaseEntity 
+    public class Warehouse: AuditBaseEntity, IEntity    
     {
         public string WarehouseName { get; set; }
 

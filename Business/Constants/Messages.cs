@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace Business.Constants
 {
-    // static verdiginde onu newlemiyorsun direkt kullaniyorsun 
     public static class Messages 
     {
         public static string ProductAdded = "Ürün eklendi"; // publicler pascal case, private olsaydı camel case

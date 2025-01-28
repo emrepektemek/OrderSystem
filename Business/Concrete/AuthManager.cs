@@ -3,10 +3,13 @@ using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Validation;
 using Core.Entities.Concrete;
+using Core.Utilities.Business;
 using Core.Utilities.Results;
 using Core.Utilities.Security.Hashing;
 using Core.Utilities.Security.JWT;
+using Entities.Concrete;
 using Entities.DTOs;
+using FluentValidation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,19 +32,21 @@ namespace Business.Concrete
         [ValidationAspect(typeof(AuthValidator))]
         public IDataResult<User> Register(UserForRegisterDto userForRegisterDto, string password)
         {
-            byte[] passwordHash, passwordSalt;
-            HashingHelper.CreatePasswordHash(password, out passwordHash, out passwordSalt);
-            var user = new User
-            {
-                Email = userForRegisterDto.Email,
-                FirstName = userForRegisterDto.FirstName,
-                LastName = userForRegisterDto.LastName,
-                PasswordHash = passwordHash,
-                PasswordSalt = passwordSalt
+                byte[] passwordHash, passwordSalt;
+                HashingHelper.CreatePasswordHash(password, out passwordHash, out passwordSalt);
+                var user = new User
+                {
+                    Email = userForRegisterDto.Email,
+                    FirstName = userForRegisterDto.FirstName,
+                    LastName = userForRegisterDto.LastName,
+                    PasswordHash = passwordHash,
+                    PasswordSalt = passwordSalt,
+                    PhoneNumber = userForRegisterDto.PhoneNumber,
+                    Gender = userForRegisterDto.Gender,
 
-            };
-            _userService.Add(user);
-            return new SuccessDataResult<User>(user, Messages.UserRegistered);
+                };
+                _userService.Add(user);
+                return new SuccessDataResult<User>(user, Messages.UserRegistered);
         }
 
         public IDataResult<User> Login(UserForLoginDto userForLoginDto)

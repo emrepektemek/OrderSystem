@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace Core.CrossCuttingConcerns.Validation
 {
-    // genelde bu gibi tool'lar static yapılır cunku uygulama boyunca bir daha new() lememek icin
     public static class ValidationTool 
     {
         public static void Validate(IValidator validator, object entity)

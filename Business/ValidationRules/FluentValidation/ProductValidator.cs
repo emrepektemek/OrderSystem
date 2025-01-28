@@ -14,13 +14,14 @@ namespace Business.ValidationRules.FluentValidation
         {
             RuleFor(P => P.ProductName).NotEmpty();
             RuleFor(p => p.ProductName).MinimumLength(2);
-            RuleFor(p => p.ProductName).Must(StartWithA).WithMessage("Ürünler A harfi ile başlamalıdır");
+           // RuleFor(p => p.ProductName).Must(StartWithA).WithMessage("Ürünler A harfi ile başlamalıdır");
 
         }
 
+        /*
         private bool StartWithA(string arg)
         {
             return arg.StartsWith("A");
-        }
+        }*/
     }
 }

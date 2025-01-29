@@ -21,7 +21,7 @@ namespace Business.Constants
         internal static string UserNotFound = "Kullanıcı bulunamadı";
         internal static string PasswordError = "Şifre hatalı";
         internal static string SuccessfulLogin = "Giriş başarılı";
-        internal static string UserAlreadyExists = "Kullanıcı zaten mevcut";
+        internal static string UserAlreadyExists = "Bu Email sistemde kayıtlıdır";
         internal static string AccessTokenCreated = "Giriş Yapıldı";
     }
 }

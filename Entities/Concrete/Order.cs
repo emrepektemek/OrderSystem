@@ -12,7 +12,7 @@ namespace Entities.Concrete
         public int CustomerId { get; set; }
         public int ProductId { get; set; }
         public DateTime OrderDate { get; set; }
-        public DateTime ShipDate { get; set; }
+        public DateTime? ShipDate { get; set; }
         public string ShippingAddress { get; set; }
     }
 }

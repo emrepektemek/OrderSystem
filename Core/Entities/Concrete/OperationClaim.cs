@@ -2,7 +2,7 @@
 {
     public class OperationClaim : AuditBaseEntity, IEntity
     {
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
     }
 

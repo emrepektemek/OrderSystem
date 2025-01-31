@@ -1,6 +1,7 @@
 ﻿using Core.DataAccess.EntityFramework;
 using Core.Entities.Concrete;
 using DataAccess.Abstract;
+using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +21,33 @@ namespace DataAccess.Concrete.EntityFramework
                                  on operationClaim.Id equals userOperationClaim.OperationClaimId
                              where userOperationClaim.UserId == user.Id
                              select new OperationClaim { Id = operationClaim.Id, Name = operationClaim.Name };
+                return result.ToList();
+
+            }
+        }
+
+        public List<UserOperationAssignmentDto> GetUsers()
+        {
+            using (var context = new OrderSystemContext())
+            {
+
+                var result = from u in context.Users
+                             join uoc in context.UserOperationClaims
+                             on u.Id equals uoc.UserId into userClaims
+                             from uoc in userClaims.DefaultIfEmpty()
+                             join oc in context.OperationClaims
+                             on uoc.OperationClaimId equals oc.Id into claims
+                             from oc in claims.DefaultIfEmpty()
+                             select new UserOperationAssignmentDto
+                             {
+                                 UserId = u.Id,
+                                 OperationClaimName = oc.Name,
+                                 FirstName = u.FirstName,
+                                 LastName = u.LastName, 
+                                 Email = u.Email,
+                                 PhoneNumber = u.PhoneNumber                              
+                             };
+
                 return result.ToList();
 
             }

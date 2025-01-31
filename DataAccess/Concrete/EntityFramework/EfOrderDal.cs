@@ -21,9 +21,9 @@ namespace DataAccess.Concrete.EntityFramework
 
                 var result = from o in context.Orders
                              join p in context.Products
-                             on o.Id equals p.Id
+                             on o.ProductId equals p.Id
                              join c in context.Customers
-                             on o.Id equals c.Id
+                             on o.CustomerId equals c.Id
                              select new OrderReportDto
                              {
                                  OrderId = o.Id,

@@ -34,6 +34,7 @@ namespace Business.Concrete
         public User GetByMail(string email)
         {
             return _userDal.Get(u => u.Email == email);
+
         }
 
         public IDataResult<List<UserOperationAssignmentDto>> GetUsers()

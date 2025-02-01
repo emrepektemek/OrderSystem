@@ -9,8 +9,6 @@ namespace Core.Entities
 {
     public abstract class AuditBaseEntity
     {
-
-        [JsonIgnore]
         public int Id { get; set; }
         public int CreatedUserId { get; set; } = 0;
         public DateTime CreatedDate { get; set; } = DateTime.Now;

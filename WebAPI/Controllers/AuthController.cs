@@ -13,6 +13,7 @@ namespace WebAPI.Controllers
         public AuthController(IAuthService authService)
         {
             _authService = authService;
+
         }
 
         [HttpPost("login")]
@@ -43,7 +44,8 @@ namespace WebAPI.Controllers
             }
 
             var registerResult = _authService.Register(userForRegisterDto, userForRegisterDto.Password);
-            //var result = _authService.CreateAccessToken(registerResult.Data);
+
+            
             if (registerResult.Success)
             {
                 return Ok(registerResult);

@@ -6,7 +6,6 @@
 
         public int OperationClaimId { get; set; }
 
-
     }
 
 }

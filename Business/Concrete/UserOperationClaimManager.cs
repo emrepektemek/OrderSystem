@@ -40,5 +40,43 @@ namespace Business.Concrete
             
 
         }
+
+ 
+        public IResult Update(UserOperationClaim userOperationClaim)
+        {
+
+            var userOperationClaimObject = new UserOperationClaim
+            {
+                Id = userOperationClaim.Id,
+                UserId = userOperationClaim.UserId,
+                OperationClaimId = userOperationClaim.OperationClaimId,
+                LastUpdatedDate = DateTime.Now
+            };
+
+            _userOperationClaimDal.Update(userOperationClaimObject);
+
+            return new SuccessResult(Messages.UpdatedUserOperationClaim);
+
+        }
+
+        public IResult Delete(UserOperationClaim userOperationClaim)
+        {
+            var userOperationClaimObject = new UserOperationClaim
+            {
+                Id = userOperationClaim.Id,
+                UserId = userOperationClaim.UserId,
+                OperationClaimId = userOperationClaim.OperationClaimId,
+                LastUpdatedDate = DateTime.Now,
+                IsDeleted = userOperationClaim.IsDeleted
+            };
+
+            _userOperationClaimDal.Update(userOperationClaimObject);
+
+            return new SuccessResult(Messages.DeleteddUserOperationClaim);
+
+        }
+
+
+
     }
 }

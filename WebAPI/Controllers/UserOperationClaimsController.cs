@@ -33,5 +33,40 @@ namespace WebAPI.Controllers
 
 
         }
+
+
+        [HttpPost("update")]
+        public ActionResult Update(UserOperationClaim userOperationClaim)
+        {
+
+            var result = _userOperationClaimService.Update(userOperationClaim);
+
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+
+            return BadRequest(result);
+
+        }
+
+
+
+        [HttpPost("delete")]
+        public ActionResult Delete(UserOperationClaim userOperationClaim)
+        {
+
+            var result = _userOperationClaimService.Delete(userOperationClaim);
+
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+
+            return BadRequest(result);
+
+        }
+
+
     }
 }

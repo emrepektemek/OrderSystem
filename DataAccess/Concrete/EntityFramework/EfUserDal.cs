@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 
 namespace DataAccess.Concrete.EntityFramework
 {
@@ -40,12 +41,15 @@ namespace DataAccess.Concrete.EntityFramework
                              from oc in claims.DefaultIfEmpty()
                              select new UserOperationAssignmentDto
                              {
+                                 Id = uoc.Id,
                                  UserId = u.Id,
+                                 OperationClaimId = oc.Id, 
                                  OperationClaimName = oc.Name,
                                  FirstName = u.FirstName,
                                  LastName = u.LastName, 
                                  Email = u.Email,
-                                 PhoneNumber = u.PhoneNumber                              
+                                 PhoneNumber = u.PhoneNumber,
+                                 IsDeleted = uoc.IsDeleted
                              };
 
                 return result.ToList();

@@ -24,5 +24,7 @@ namespace Business.Constants
         internal static string UserAlreadyExists = "Bu Email sistemde kayıtlıdır";
         internal static string AccessTokenCreated = "Giriş Yapıldı";
         internal static string CreatedUserOperationClaim = "Kullanıcıya rol atandı";
+        internal static string UpdatedUserOperationClaim = "Kullanıcının rolü düzenlendi";
+        internal static string DeleteddUserOperationClaim = "Kullanıcının rolü silindi";
     }
 }

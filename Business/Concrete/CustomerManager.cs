@@ -38,8 +38,7 @@ namespace Business.Concrete
                 PhoneNumber= customer.PhoneNumber,
                 Email= customer.Email,  
                 CreatedUserId = 0,
-                LastUpdatedDate= DateTime.Now, 
-                LastUpdatedUserId= 0,
+                CreatedDate= DateTime.Now, 
             };
 
             _customerDal.Add(customerObject);

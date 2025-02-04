@@ -12,16 +12,22 @@ namespace Business.ValidationRules.FluentValidation
     {
         public ProductValidator()
         {
-            RuleFor(P => P.ProductName).NotEmpty();
-            RuleFor(p => p.ProductName).MinimumLength(2);
-           // RuleFor(p => p.ProductName).Must(StartWithA).WithMessage("Ürünler A harfi ile başlamalıdır");
+
+            RuleFor(x => x.CategoryId).NotEmpty().WithMessage("Category ID is required.");
+
+            RuleFor(x => x.CategoryId).GreaterThan(0).WithMessage("Category ID must be greater than zero.");
+
+            RuleFor(x => x.CategoryId).Must(x => x % 1 == 0).WithMessage("Category ID must be an integer.");
+
+            RuleFor(p => p.ProductName).NotEmpty();
+
+            RuleFor(p => p.ProductName).MaximumLength(100);
+      
+            RuleFor(p => p.Size).GreaterThan(0).WithMessage("Size değeri boş bırakılmamalıdır");
+
 
         }
-
-        /*
-        private bool StartWithA(string arg)
-        {
-            return arg.StartsWith("A");
-        }*/
     }
+
 }
+

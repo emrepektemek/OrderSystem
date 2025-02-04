@@ -27,5 +27,6 @@ namespace Business.Constants
         internal static string UpdatedUserOperationClaim = "Kullanıcının rolü düzenlendi";
         internal static string DeleteddUserOperationClaim = "Kullanıcının rolü silindi";
         internal static string CreatedCustomer = "Customer oluşturuldu";
+        internal static string CategoryNotExist = "Bu Category veri tabanında bulunmuyor";
     }
 }

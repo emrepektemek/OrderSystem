@@ -2,6 +2,7 @@
 using Business.BusinessAspects.Autofac;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
+using Castle.Core.Resource;
 using Core.Aspects.Autofac.Caching;
 using Core.Aspects.Autofac.Validation;
 using Core.CrossCuttingConcerns.Validation;
@@ -23,32 +24,47 @@ namespace Business.Concrete
     public class ProductManager : IProductService
     {
         IProductDal _productDal;
-        public ProductManager(IProductDal productDal)
+
+        ICategoryService _categoryService;  
+        public ProductManager(IProductDal productDal, ICategoryService categoryService)
         {
             _productDal = productDal;
-           
+            _categoryService = categoryService; 
         }
 
         //[SecuredOperation("admin")]
-        //[CacheRemoveAspect("IProductService.Get")]
 
         [ValidationAspect(typeof(ProductValidator))]
         public IResult Add(Product product)
         {
-            // bussiness kurallari
-
-            IResult result =  BusinessRules.Run(CheckIfProductNameExists(product.ProductName));
+            
+            IResult result =  BusinessRules.Run(
+                CheckIfCategoryExists(product.CategoryId), 
+                CheckIfProductNameExists(product.ProductName));
 
             if (result != null)
             {
                 return result;
             }
 
-            _productDal.Add(product);
+            var productObject = new Product
+            {
+                CategoryId = product.CategoryId,
+                ProductName = product.ProductName, 
+                Size = product.Size,    
+                UnitPrice = product.UnitPrice,
+                Description = product.Description,  
+                CreatedUserId = 0,
+                CreatedDate = DateTime.Now
+            };
+
+
+            _productDal.Add(productObject);
+
             return new SuccessResult(Messages.ProductAdded);   
         }
 
-        //[CacheAspect]
+       
         public IDataResult<List<Product>> GetAll()
         {
 
@@ -56,20 +72,13 @@ namespace Business.Concrete
 
         }
 
-        //[CacheAspect]
+
         public IDataResult<Product> GetById(int productId)
         {
             return new SuccessDataResult<Product>(_productDal.Get(p => p.Id == productId));
         }
 
 
-        /* public IDataResult<List<ProductDetailDto>>  GetProductsDetails()
-         {
-             return new SuccessDataResult<List<ProductDetailDto>> (_productDal.GetProductDetails());
-         }*/
-
-
-        //[CacheRemoveAspect("IProductService.Get")]
 
         [ValidationAspect(typeof(ProductValidator))]
         public IResult Update(Product product)
@@ -90,6 +99,20 @@ namespace Business.Concrete
 
         }
 
-    
+        private IResult CheckIfCategoryExists(int categoryId)
+        {
+            var result = _categoryService.GetByCategoryId(categoryId);
+
+            if (result == null)
+            {
+                return new ErrorResult(Messages.CategoryNotExist);
+            }
+
+            return new SuccessResult();
+
+        }
+
+
+
     }
 }

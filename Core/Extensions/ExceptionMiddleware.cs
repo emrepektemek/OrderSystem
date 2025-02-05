@@ -52,6 +52,21 @@ namespace Core.Extensions
 
             }
 
+            if (e.GetType() == typeof(AuthorizationException))
+            {
+                httpContext.Response.StatusCode = (int)HttpStatusCode.Unauthorized; 
+
+                var errorResponse = new
+                {
+                    success = false,
+                    message = e.Message
+                };
+
+                return httpContext.Response.WriteAsync(System.Text.Json.JsonSerializer.Serialize(errorResponse));
+            }
+
+
+
             return httpContext.Response.WriteAsync(new ErrorDetails
             {
                 StatusCode = httpContext.Response.StatusCode,

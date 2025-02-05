@@ -24,6 +24,7 @@ namespace DataAccess.Concrete.EntityFramework
                              on o.ProductId equals p.Id
                              join c in context.Customers
                              on o.CustomerId equals c.Id
+                             orderby o.OrderDate descending, o.Status descending
                              select new OrderReportDto
                              {
                                  OrderId = o.Id,

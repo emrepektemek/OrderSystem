@@ -17,11 +17,21 @@ namespace Business.ValidationRules.FluentValidation
 
             RuleFor(u => u.CustomerName).MaximumLength(100);
 
+         
+            RuleFor(u => u.CustomerName).MaximumLength(255);
+
             //RuleFor(u => u.CustomerName).Matches(@"^[\p{L} ]+$");
 
-            RuleFor(u => u.Address).NotEmpty();
 
-            RuleFor(u => u.CustomerName).MaximumLength(255);
+            RuleFor(u => u.Email).EmailAddress();
+
+            RuleFor(u => u.Email).NotEmpty();
+
+            RuleFor(u => u.Email).MaximumLength(100);
+
+
+
+            RuleFor(u => u.Address).NotEmpty();
 
             //RuleFor(u => u.Address).Matches(@"^[\p{L} ]+$");
 
@@ -33,11 +43,6 @@ namespace Business.ValidationRules.FluentValidation
             .Matches(@"^[\d\s\(\)\-\+]+$")
             .WithMessage("Telefon numarası yalnızca rakamlar, boşluk, parantez, '-', ve '+' içerebilir.");
 
-            RuleFor(u => u.Email).EmailAddress();
-
-            RuleFor(u => u.Email).NotEmpty();
-
-            RuleFor(u => u.Email).MaximumLength(100);
 
 
         }  

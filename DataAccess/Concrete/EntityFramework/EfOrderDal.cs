@@ -21,9 +21,13 @@ namespace DataAccess.Concrete.EntityFramework
 
                 var result = from o in context.Orders
                              join p in context.Products
-                             on o.ProductId equals p.Id
+                             on o.ProductId equals p.Id into productGroup
+                             from p in productGroup.DefaultIfEmpty() 
+
                              join c in context.Customers
-                             on o.CustomerId equals c.Id
+                             on o.CustomerId equals c.Id into customerGroup
+                             from c in customerGroup.DefaultIfEmpty() 
+
                              orderby o.OrderDate descending, o.Status descending
                              select new OrderReportDto
                              {

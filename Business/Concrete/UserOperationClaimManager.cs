@@ -31,7 +31,9 @@ namespace Business.Concrete
                 UserId = userOperationClaim.UserId,
                 OperationClaimId = userOperationClaim.OperationClaimId, 
                 Status = true,
-                IsDeleted = false
+                IsDeleted = false,
+                CreatedUserId = userOperationClaim.CreatedUserId,
+                CreatedDate = DateTime.Now
             };
 
             _userOperationClaimDal.Add(userOperationClaimObject);
@@ -50,6 +52,7 @@ namespace Business.Concrete
                 Id = userOperationClaim.Id,
                 UserId = userOperationClaim.UserId,
                 OperationClaimId = userOperationClaim.OperationClaimId,
+                LastUpdatedUserId = userOperationClaim.LastUpdatedUserId,
                 LastUpdatedDate = DateTime.Now
             };
 
@@ -68,6 +71,7 @@ namespace Business.Concrete
                 Id = userOperationClaim.Id,
                 UserId = userOperationClaim.UserId,
                 OperationClaimId = userOperationClaim.OperationClaimId,
+                LastUpdatedUserId = userOperationClaim.LastUpdatedUserId,
                 LastUpdatedDate = DateTime.Now,
                 IsDeleted = userOperationClaim.IsDeleted
             };

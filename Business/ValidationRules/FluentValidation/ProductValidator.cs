@@ -15,6 +15,8 @@ namespace Business.ValidationRules.FluentValidation
 
             RuleFor(x => x.CategoryId).NotEmpty().WithMessage("Category ID is required.");
 
+            RuleFor(x => x.CategoryId).NotNull().WithMessage("Category ID is required.");
+
             RuleFor(x => x.CategoryId).GreaterThan(0).WithMessage("Category ID must be greater than zero.");
 
             RuleFor(x => x.CategoryId).Must(x => x % 1 == 0).WithMessage("Category ID must be an integer.");

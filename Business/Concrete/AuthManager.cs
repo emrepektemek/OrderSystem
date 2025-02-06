@@ -22,30 +22,45 @@ namespace Business.Concrete
     {
         private IUserService _userService;
         private ITokenHelper _tokenHelper;
+        private IUserOperationClaimService _userOperationClaimService;
 
-        public AuthManager(IUserService userService, ITokenHelper tokenHelper)
+        public AuthManager(IUserService userService, ITokenHelper tokenHelper, IUserOperationClaimService userOperationClaimService)
         {
             _userService = userService;
             _tokenHelper = tokenHelper;
+            _userOperationClaimService = userOperationClaimService; 
         }
 
         [ValidationAspect(typeof(AuthValidator))]
         public IDataResult<User> Register(UserForRegisterDto userForRegisterDto, string password)
         {
-                byte[] passwordHash, passwordSalt;
-                HashingHelper.CreatePasswordHash(password, out passwordHash, out passwordSalt);
-                var user = new User
-                {
-                    Email = userForRegisterDto.Email,
-                    FirstName = userForRegisterDto.FirstName,
-                    LastName = userForRegisterDto.LastName,
-                    PasswordHash = passwordHash,
-                    PasswordSalt = passwordSalt,
-                    PhoneNumber = userForRegisterDto.PhoneNumber,
-                    Gender = userForRegisterDto.Gender,
+            byte[] passwordHash, passwordSalt;
+            HashingHelper.CreatePasswordHash(password, out passwordHash, out passwordSalt);
+            var user = new User
+            {
+                Email = userForRegisterDto.Email,
+                FirstName = userForRegisterDto.FirstName,
+                LastName = userForRegisterDto.LastName,
+                PasswordHash = passwordHash,
+                PasswordSalt = passwordSalt,
+                PhoneNumber = userForRegisterDto.PhoneNumber,
+                Gender = userForRegisterDto.Gender,
 
+            };
+
+            var userObject = _userService.Add(user);
+
+            if (user != null)
+            {
+                var userOperationClaimObejct = new UserOperationClaim
+                {
+                    UserId = user.Id,
+                    OperationClaimId = 4
                 };
-                _userService.Add(user);
+
+                _userOperationClaimService.Add(userOperationClaimObejct);
+
+            }              
                 return new SuccessDataResult<User>(user, Messages.UserRegistered);
         }
 

@@ -26,9 +26,9 @@ namespace Business.Concrete
             return _userDal.GetClaims(user);
         }
 
-        public void Add(User user)
+        public User Add(User user)
         {
-            _userDal.Add(user);
+            return _userDal.Add(user);
         }
 
         public User GetByMail(string email)

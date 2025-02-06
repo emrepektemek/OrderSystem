@@ -1,7 +1,9 @@
 ﻿using Core.DataAccess.EntityFramework;
+using Core.Entities;
 using Core.Entities.Concrete;
 using DataAccess.Abstract;
 using Entities.DTOs;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -56,5 +58,19 @@ namespace DataAccess.Concrete.EntityFramework
 
             }
         }
+
+        public User Add(User user)
+        {
+            using (OrderSystemContext context = new OrderSystemContext())
+            {
+                var addedEntity = context.Entry(user);
+                addedEntity.State = EntityState.Added;
+                context.SaveChanges();
+            }
+
+            return user;
+        }
+
+       
     }
 }

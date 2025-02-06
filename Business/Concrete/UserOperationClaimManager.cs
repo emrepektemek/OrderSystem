@@ -23,8 +23,6 @@ namespace Business.Concrete
                 
         }
 
-
-        [SecuredOperation("admin")]
         public IResult Add(UserOperationClaim userOperationClaim)
         {         
             
@@ -39,8 +37,6 @@ namespace Business.Concrete
             _userOperationClaimDal.Add(userOperationClaimObject);
 
             return new SuccessResult(Messages.CreatedUserOperationClaim);   
-
-            
 
         }
 

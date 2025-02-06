@@ -13,7 +13,7 @@ namespace Business.Abstract
     {
         IDataResult<List<UserOperationAssignmentDto>> GetUsers();
         List<OperationClaim> GetClaims(User user);
-        void Add(User user);
+        User Add(User user);
         User GetByMail(string email);
         
     }

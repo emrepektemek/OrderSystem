@@ -14,5 +14,7 @@ namespace DataAccess.Abstract
         List<OperationClaim> GetClaims(User user);
 
         List<UserOperationAssignmentDto> GetUsers();
+
+        User Add(User user);
     }
 }

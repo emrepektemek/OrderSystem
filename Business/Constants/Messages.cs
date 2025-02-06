@@ -18,6 +18,7 @@ namespace Business.Constants
         public static string CategoryLimitExceded = "New product cannot be added due to category limit exceeded";
         public static string? AuthorizationDenied = "You do not have access to this authorization area";
         public static string UserRegistered = "Successfully registered";
+        public static string UserNotRegistered = "Registration failed";
         public static string UserNotFound = "User not found";
         public static string PasswordError = "Incorrect password";
         public static string SuccessfulLogin = "Login successful";

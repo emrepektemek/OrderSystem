@@ -54,7 +54,7 @@ namespace Business.Concrete
                 Size = product.Size,    
                 UnitPrice = product.UnitPrice,
                 Description = product.Description,  
-                CreatedUserId = 0,
+                CreatedUserId = product.CreatedUserId,
                 CreatedDate = DateTime.Now
             };
 

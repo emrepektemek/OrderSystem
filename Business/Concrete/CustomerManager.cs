@@ -38,7 +38,7 @@ namespace Business.Concrete
                 Address= customer.Address, 
                 PhoneNumber= customer.PhoneNumber,
                 Email= customer.Email,  
-                CreatedUserId = 0,
+                CreatedUserId = customer.CreatedUserId,
                 CreatedDate= DateTime.Now, 
             };
 

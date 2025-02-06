@@ -16,10 +16,11 @@ namespace Business.ValidationRules.FluentValidation
 
         public AuthValidator()
         {
-            RuleFor(u => u.Email).EmailAddress().WithMessage("Invalid email address.");
 
             RuleFor(u => u.Email).NotEmpty().WithMessage("Email is required.");
 
+            RuleFor(u => u.Email).EmailAddress().WithMessage("Invalid email address.");
+          
             RuleFor(u => u.Email).MaximumLength(50).WithMessage("Email cannot exceed 50 characters.");
 
 

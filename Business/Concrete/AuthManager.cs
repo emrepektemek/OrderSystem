@@ -87,10 +87,13 @@ namespace Business.Concrete
 
             if (user != null)
             {
+                var operationClaimId = adminRegisterDto.OperationClaimId == 0 ? 4 : adminRegisterDto.OperationClaimId;
+
                 var userOperationClaimObejct = new UserOperationClaim
                 {
                     UserId = user.Id,
-                    OperationClaimId = adminRegisterDto.OperationClaimId
+                    OperationClaimId = operationClaimId,
+                    CreatedUserId = adminRegisterDto.CreatedUserId
                 };
 
                 _userOperationClaimService.Add(userOperationClaimObejct);

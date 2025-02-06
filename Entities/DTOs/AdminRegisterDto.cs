@@ -18,7 +18,8 @@ namespace Entities.DTOs
         public string LastName { get; set; }
         public string? PhoneNumber { get; set; }
         public string? Gender { get; set; }
-       
+        public int? OperationClaimId { get; set; } = 4;
+
     }
 
 }

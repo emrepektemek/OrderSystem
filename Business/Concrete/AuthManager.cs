@@ -70,27 +70,27 @@ namespace Business.Concrete
             byte[] passwordHash, passwordSalt;
             HashingHelper.CreatePasswordHash(password, out passwordHash, out passwordSalt);
             var user = new User
-            {
-                CreatedUserId = adminRegisterDto.CreatedUserId,
-                CreatedDate = DateTime.Now,
+            { 
                 Email = adminRegisterDto.Email,
                 FirstName = adminRegisterDto.FirstName,
                 LastName = adminRegisterDto.LastName,
                 PasswordHash = passwordHash,
                 PasswordSalt = passwordSalt,
                 PhoneNumber = adminRegisterDto.PhoneNumber,
-                Gender = adminRegisterDto.Gender,      
-               
+                Gender = adminRegisterDto.Gender,
+                CreatedUserId = adminRegisterDto.CreatedUserId,
+                CreatedDate = DateTime.Now,
             };
 
             var userObject = _userService.Add(user);
+
 
             if (user != null)
             {
                 var userOperationClaimObejct = new UserOperationClaim
                 {
                     UserId = user.Id,
-                    OperationClaimId = 4
+                    OperationClaimId = adminRegisterDto.OperationClaimId
                 };
 
                 _userOperationClaimService.Add(userOperationClaimObejct);

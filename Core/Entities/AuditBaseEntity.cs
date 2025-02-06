@@ -10,7 +10,7 @@ namespace Core.Entities
     public abstract class AuditBaseEntity
     {
         public int Id { get; set; }
-        public int CreatedUserId { get; set; }
+        public int CreatedUserId { get; set; } = 0;
         public DateTime CreatedDate { get; set; } = DateTime.Now;
         public int? LastUpdatedUserId { get; set; } = 0;
         public DateTime? LastUpdatedDate { get; set; } = DateTime.Now;

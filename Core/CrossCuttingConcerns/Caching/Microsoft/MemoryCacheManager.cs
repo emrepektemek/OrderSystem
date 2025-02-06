@@ -10,14 +10,6 @@ using System.Threading.Tasks;
 
 namespace Core.CrossCuttingConcerns.Caching.Microsoft
 {
-    /*mulakatta bu tip ve varyasyonlarini sorar. Bu Adapter Patter'dır Microsoft'un Cache sistemini kendi sistemimize 
-     * uyarladık yani var olan bir sistemi kendi sistemimize uyarladik. Yani sana mulakatta soyle bir paket var 
-     bunu sistemine nasil entegre edersin diye sorarsa ? Bu teknolojinin anternatifleri olabileceginden gelecekte
-    farkli teknolojilere, paketlere gecilebileceginden once bu teknolojileri temsil edebilen bir interface olustururum. Bu
-    interface'e tum temel metotlari yazarim. Bu metotlari implemente edecegim ve su anda benden istenen paketi, teknlojiyi
-    kullanabilmek icin o teknolojiye ait sinif yazarim. Sonra interface'den gelen metotları birer birer doldururum. Bu 
-    pakete ozgu metotlari yine bu class icinde gerceklestirim. Artik sinifim hazir istenilen yerde bu sinifi kullanirim.
-    */
     public class MemoryCacheManager : ICacheManager
     {
        
@@ -25,7 +17,7 @@ namespace Core.CrossCuttingConcerns.Caching.Microsoft
 
         public MemoryCacheManager()
         {
-            _memoryCache = ServiceTool.ServiceProvider.GetService<IMemoryCache>(); // windows form'da .net'in otomatik injection'i olmadigi icin yaptik
+            _memoryCache = ServiceTool.ServiceProvider.GetService<IMemoryCache>(); 
         }
 
         public void Add(string key, object value, int duration)

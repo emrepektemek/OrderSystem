@@ -13,38 +13,34 @@ namespace Business.ValidationRules.FluentValidation
     {
         public CustomerValidator() {
 
-            RuleFor(u => u.CustomerName).NotEmpty();
+            RuleFor(u => u.CustomerName).NotEmpty().WithMessage("Customer name is required.");
 
-            RuleFor(u => u.CustomerName).MaximumLength(100);
+            RuleFor(u => u.CustomerName).MaximumLength(100).WithMessage("Customer name cannot exceed 100 characters.");
 
-         
-            RuleFor(u => u.CustomerName).MaximumLength(255);
-
-            //RuleFor(u => u.CustomerName).Matches(@"^[\p{L} ]+$");
+            RuleFor(u => u.CustomerName).MaximumLength(255) .WithMessage("Customer name cannot exceed 255 characters.");
 
 
-            RuleFor(u => u.Email).EmailAddress();
+            RuleFor(u => u.Email).EmailAddress().WithMessage("Invalid email address.");
 
-            RuleFor(u => u.Email).NotEmpty();
+            RuleFor(u => u.Email).NotEmpty().WithMessage("Email is required.");
 
-            RuleFor(u => u.Email).MaximumLength(100);
+            RuleFor(u => u.Email).MaximumLength(100).WithMessage("Email cannot exceed 100 characters.");
 
 
+            RuleFor(u => u.Address).NotEmpty().WithMessage("Address is required.");
 
-            RuleFor(u => u.Address).NotEmpty();
 
-            //RuleFor(u => u.Address).Matches(@"^[\p{L} ]+$");
+            RuleFor(u => u.PhoneNumber).NotEmpty() .WithMessage("Phone number is required.");
 
-            RuleFor(u => u.PhoneNumber).NotEmpty();
-
-            RuleFor(u => u.PhoneNumber).MaximumLength(20);
+            RuleFor(u => u.PhoneNumber).MaximumLength(20).WithMessage("Phone number cannot exceed 20 characters.");
 
             RuleFor(u => u.PhoneNumber)
-            .Matches(@"^[\d\s\(\)\-\+]+$")
-            .WithMessage("Telefon numarası yalnızca rakamlar, boşluk, parantez, '-', ve '+' içerebilir.");
+                .Matches(@"^[\d\s\(\)\-\+]+$")
+                .WithMessage("Phone number can only contain digits, spaces, parentheses, '-', and '+'.");
 
 
 
-        }  
+
+        }
     }
 }

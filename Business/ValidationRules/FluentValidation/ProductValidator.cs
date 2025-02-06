@@ -19,11 +19,14 @@ namespace Business.ValidationRules.FluentValidation
 
             RuleFor(x => x.CategoryId).Must(x => x % 1 == 0).WithMessage("Category ID must be an integer.");
 
-            RuleFor(p => p.ProductName).NotEmpty();
 
-            RuleFor(p => p.ProductName).MaximumLength(100);
-      
-            RuleFor(p => p.Size).GreaterThan(0).WithMessage("Size değeri boş bırakılmamalıdır");
+            RuleFor(p => p.ProductName).NotEmpty().WithMessage("Product name is required.");
+
+            RuleFor(p => p.ProductName).MaximumLength(100) .WithMessage("Product name cannot exceed 100 characters.");
+
+
+            RuleFor(p => p.Size).GreaterThan(0) .WithMessage("Size must not be empty.");
+
 
 
         }

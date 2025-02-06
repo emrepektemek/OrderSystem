@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.BusinessAspects.Autofac;
 using Business.Constants;
 using Core.Entities.Concrete;
 using Core.Utilities.Results;
@@ -22,6 +23,8 @@ namespace Business.Concrete
                 
         }
 
+
+        [SecuredOperation("admin")]
         public IResult Add(UserOperationClaim userOperationClaim)
         {         
             
@@ -41,7 +44,8 @@ namespace Business.Concrete
 
         }
 
- 
+
+        [SecuredOperation("admin")]
         public IResult Update(UserOperationClaim userOperationClaim)
         {
 
@@ -59,6 +63,8 @@ namespace Business.Concrete
 
         }
 
+
+        [SecuredOperation("admin")]
         public IResult Delete(UserOperationClaim userOperationClaim)
         {
             var userOperationClaimObject = new UserOperationClaim

@@ -45,7 +45,6 @@ namespace Business.Concrete
                 PasswordSalt = passwordSalt,
                 PhoneNumber = userForRegisterDto.PhoneNumber,
                 Gender = userForRegisterDto.Gender,
-
             };
 
             var userObject = _userService.Add(user);
@@ -62,6 +61,42 @@ namespace Business.Concrete
 
             }              
                 return new SuccessDataResult<User>(user, Messages.UserRegistered);
+        }
+
+
+        [ValidationAspect(typeof(AdminRegisterValidator))]
+        public IDataResult<User> AdminRegister(AdminRegisterDto adminRegisterDto, string password)
+        {
+            byte[] passwordHash, passwordSalt;
+            HashingHelper.CreatePasswordHash(password, out passwordHash, out passwordSalt);
+            var user = new User
+            {
+                CreatedUserId = adminRegisterDto.CreatedUserId,
+                CreatedDate = DateTime.Now,
+                Email = adminRegisterDto.Email,
+                FirstName = adminRegisterDto.FirstName,
+                LastName = adminRegisterDto.LastName,
+                PasswordHash = passwordHash,
+                PasswordSalt = passwordSalt,
+                PhoneNumber = adminRegisterDto.PhoneNumber,
+                Gender = adminRegisterDto.Gender,      
+               
+            };
+
+            var userObject = _userService.Add(user);
+
+            if (user != null)
+            {
+                var userOperationClaimObejct = new UserOperationClaim
+                {
+                    UserId = user.Id,
+                    OperationClaimId = 4
+                };
+
+                _userOperationClaimService.Add(userOperationClaimObejct);
+
+            }
+            return new SuccessDataResult<User>(user, Messages.UserRegistered);
         }
 
         public IDataResult<User> Login(UserForLoginDto userForLoginDto)
@@ -95,5 +130,7 @@ namespace Business.Concrete
             var accessToken = _tokenHelper.CreateToken(user, claims);
             return new SuccessDataResult<AccessToken>(accessToken, Messages.AccessTokenCreated);
         }
+
+      
     }
 }

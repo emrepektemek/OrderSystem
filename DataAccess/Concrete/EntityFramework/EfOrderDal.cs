@@ -28,7 +28,9 @@ namespace DataAccess.Concrete.EntityFramework
                              on o.CustomerId equals c.Id into customerGroup
                              from c in customerGroup.DefaultIfEmpty() 
 
-                             orderby o.OrderDate descending, o.Status descending
+                             orderby o.OrderDate descending, 
+                             o.IsApproved ascending,
+                             o.Status descending
                              select new OrderReportDto
                              {
                                  OrderId = o.Id,
@@ -39,7 +41,8 @@ namespace DataAccess.Concrete.EntityFramework
                                  CustomerEmail = c.Email,
                                  OrderDate = o.OrderDate,
                                  ShipDate = o.ShipDate,
-                                 OrderStatus = o.Status
+                                 OrderStatus = o.Status,
+                                 IsApproved = o.IsApproved, 
                              };
 
                 return result.ToList();

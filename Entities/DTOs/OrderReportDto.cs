@@ -18,5 +18,6 @@ namespace Entities.DTOs
         public DateTime OrderDate { get; set; }
         public DateTime? ShipDate { get; set; }
         public bool OrderStatus { get; set; }
+        public bool IsApproved { get; set; }    
     }
 }

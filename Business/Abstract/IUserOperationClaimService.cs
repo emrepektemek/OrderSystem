@@ -17,6 +17,8 @@ namespace Business.Abstract
 
         IResult Delete(UserOperationClaim userOperationClaim);
 
+        int GetUserOperatinClaimId(int userId);
+
 
     }
 }

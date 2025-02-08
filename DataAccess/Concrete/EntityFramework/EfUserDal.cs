@@ -59,6 +59,28 @@ namespace DataAccess.Concrete.EntityFramework
             }
         }
 
+        public List<User> GetUsersForCustomer()
+        {
+            using (var context = new OrderSystemContext())
+            {
+                var result = from u in context.Users
+                             join uc in context.UserOperationClaims on u.Id equals uc.UserId
+                             where uc.OperationClaimId == 4
+                             && !context.Customers.Any(c => c.UserId == u.Id)
+                             select new User
+                             {
+                                 Id = u.Id,
+                                 FirstName = u.FirstName,
+                                 LastName = u.LastName,
+                                 Email = u.Email,
+                                 PhoneNumber = u.PhoneNumber,
+                                 Gender = u.Gender
+                             };
+
+                return result.ToList();
+            }
+        }
+
         public User Add(User user)
         {
             using (OrderSystemContext context = new OrderSystemContext())

@@ -4,7 +4,7 @@
     {
         public int UserId { get; set; }
 
-        public int? OperationClaimId { get; set; } = 4;
+        public int OperationClaimId { get; set; } = 4;
 
     }
 

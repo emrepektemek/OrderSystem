@@ -15,6 +15,8 @@ namespace DataAccess.Abstract
 
         List<UserOperationAssignmentDto> GetUsers();
 
+        List<User> GetUsersForCustomer();
+
         User Add(User user);
     }
 }

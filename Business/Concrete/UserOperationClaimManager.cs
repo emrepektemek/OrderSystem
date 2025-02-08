@@ -82,6 +82,21 @@ namespace Business.Concrete
 
         }
 
+        [SecuredOperation("admin,customer.representative")]
+        public int GetUserOperatinClaimId(int userId)
+        {
+
+            var userOperatinClaimObject = _userOperationClaimDal.Get(uoc => uoc.UserId == userId);
+
+            if(userOperatinClaimObject != null)
+            {
+                return userOperatinClaimObject.OperationClaimId;
+            } 
+
+            return 0;
+
+        }
+
 
 
     }

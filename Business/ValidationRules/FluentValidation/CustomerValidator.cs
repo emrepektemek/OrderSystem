@@ -13,11 +13,6 @@ namespace Business.ValidationRules.FluentValidation
     {
         public CustomerValidator() {
 
-            RuleFor(u => u.CustomerName).NotEmpty().WithMessage("Customer name is required.");
-
-            RuleFor(u => u.CustomerName).MaximumLength(100).WithMessage("Customer name cannot exceed 100 characters.");
-
-            RuleFor(u => u.CustomerName).MaximumLength(255) .WithMessage("Customer name cannot exceed 255 characters.");
 
 
             RuleFor(u => u.Email).NotEmpty().WithMessage("Email is required.");
@@ -25,6 +20,14 @@ namespace Business.ValidationRules.FluentValidation
             RuleFor(u => u.Email).EmailAddress().WithMessage("Invalid email address.");
 
             RuleFor(u => u.Email).MaximumLength(100).WithMessage("Email cannot exceed 100 characters.");
+
+
+
+            RuleFor(u => u.CustomerName).NotEmpty().WithMessage("Customer name is required.");
+
+            RuleFor(u => u.CustomerName).MaximumLength(100).WithMessage("Customer name cannot exceed 100 characters.");
+
+            RuleFor(u => u.CustomerName).MaximumLength(255) .WithMessage("Customer name cannot exceed 255 characters.");
 
 
             RuleFor(u => u.Address).NotEmpty().WithMessage("Address is required.");

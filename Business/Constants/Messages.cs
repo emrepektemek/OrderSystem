@@ -23,11 +23,13 @@ namespace Business.Constants
         public static string PasswordError = "Incorrect password";
         public static string SuccessfulLogin = "Login successful";
         public static string UserAlreadyExists = "This email is already registered in the system";
+        public static string CustomerAlreadyExists = "This email is already registered as a customer";
         public static string AccessTokenCreated = "Logged in";
         public static string CreatedUserOperationClaim = "Role assigned to the user";
         public static string UpdatedUserOperationClaim = "User's role updated";
         public static string DeleteddUserOperationClaim = "User's role deleted";
         public static string CreatedCustomer = "Customer created";
         public static string CategoryNotExist = "This category does not exist in the database";
+        public static string userClaimIdNotUser = "The account is not a user";
     }
 }

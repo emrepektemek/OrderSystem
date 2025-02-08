@@ -39,12 +39,13 @@ namespace Business.ValidationRules.FluentValidation
             RuleFor(u => u.LastName).MaximumLength(50) .WithMessage("Last name cannot exceed 50 characters.");
 
 
+            RuleFor(u => u.PhoneNumber).NotEmpty().WithMessage("Phone number is required.");
+
             RuleFor(u => u.PhoneNumber).MaximumLength(20).WithMessage("Phone number cannot exceed 20 characters.");
 
             RuleFor(u => u.PhoneNumber)
                 .Matches(@"^[\d\s\(\)\-\+]+$")
                 .WithMessage("Phone number can only contain digits, spaces, parentheses, '-', and '+'.");
-
 
 
         }

@@ -41,5 +41,10 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<List<UserOperationAssignmentDto>>(_userDal.GetUsers());
         }
+
+        public IDataResult<List<User>> GetUsersForCustomer()
+        {
+            return new SuccessDataResult<List<User>>(_userDal.GetUsersForCustomer());
+        }
     }
 }

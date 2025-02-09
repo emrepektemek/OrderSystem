@@ -31,5 +31,6 @@ namespace Business.Constants
         public static string CreatedCustomer = "Customer created";
         public static string CategoryNotExist = "This category does not exist in the database";
         public static string userClaimIdNotUser = "The account is not a user";
+        public static string OrderCreated = "Order created";
     }
 }

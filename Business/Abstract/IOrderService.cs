@@ -13,5 +13,7 @@ namespace Business.Abstract
     {
         IDataResult<List<OrderReportDto>> GetOrderReports();
 
+        IResult Add(Order order);
+
     }
 }

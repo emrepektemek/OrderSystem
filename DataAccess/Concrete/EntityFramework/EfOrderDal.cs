@@ -39,6 +39,7 @@ namespace DataAccess.Concrete.EntityFramework
                                  CustomerAddress = c.Address,
                                  CustomerPhoneNumber = c.PhoneNumber,
                                  CustomerEmail = c.Email,
+                                 Quantity = o.Quantity,
                                  OrderDate = o.OrderDate,
                                  ShipDate = o.ShipDate,
                                  OrderStatus = o.Status,

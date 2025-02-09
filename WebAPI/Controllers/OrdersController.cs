@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Entities.Concrete;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers
@@ -19,6 +20,20 @@ namespace WebAPI.Controllers
         public IActionResult GetInventoryReports()
         {
             var result = _orderService.GetOrderReports();   
+
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+
+            return BadRequest(result);
+
+        }
+
+        [HttpPost("add")]
+        public IActionResult Add(Order order)
+        {
+            var result = _orderService.Add(order);
 
             if (result.Success)
             {

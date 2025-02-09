@@ -43,8 +43,7 @@ namespace Business.Concrete
                 CreatedDate = DateTime.Now,
                 Status = true,
                 IsDeleted = false,
-                IsApproved = false,
-               
+                IsApproved = null,               
             };
 
 
@@ -58,9 +57,9 @@ namespace Business.Concrete
             return new SuccessDataResult<List<OrderReportDto>>(_orderDal.GetOrderReports());
         }
 
-        public IDataResult<List<OrderReportDto>> GetByUserId()
+        public IDataResult<List<UserOrderOrderReportDto>> GetByCustomerId(int customerId)
         {
-            return new SuccessDataResult<List<OrderReportDto>>(_orderDal.GetOrderReports());
+            return new SuccessDataResult<List<UserOrderOrderReportDto>>(_orderDal.GetUserOrderReports(customerId));
         }
 
     }

@@ -30,6 +30,21 @@ namespace WebAPI.Controllers
 
         }
 
+
+        [HttpGet("getuserreports")]
+        public IActionResult GetUserOrderReports(int customerId)
+        {
+            var result = _orderService.GetByCustomerId(customerId);
+
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+
+            return BadRequest(result);
+
+        }
+
         [HttpPost("add")]
         public IActionResult Add(Order order)
         {

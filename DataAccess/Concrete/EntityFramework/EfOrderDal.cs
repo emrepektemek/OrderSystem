@@ -50,5 +50,35 @@ namespace DataAccess.Concrete.EntityFramework
 
             }
         }
+
+        public List<UserOrderOrderReportDto> GetUserOrderReports(int customerId)
+        {
+            using (OrderSystemContext context = new OrderSystemContext())
+            {
+
+                var result = from o in context.Orders
+                             join p in context.Products
+                             on o.ProductId equals p.Id into productGroup
+                             from p in productGroup.DefaultIfEmpty()
+                             where o.CustomerId == customerId
+                             orderby o.OrderDate descending,
+                             o.IsApproved ascending,
+                             o.Status descending
+                             select new UserOrderOrderReportDto
+                             {
+                                 ProductName = p.ProductName,
+                                 Quantity = o.Quantity,
+                                 UnitPrice = p.UnitPrice,
+                                 OrderDate = o.OrderDate,
+                                 ShipDate = o.ShipDate, 
+                                 IsApproved= o.IsApproved,
+                                 Status = o.Status,                              
+                             };
+
+                return result.ToList();
+
+            }
+
+        }
     }
 }

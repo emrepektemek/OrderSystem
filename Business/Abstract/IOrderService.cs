@@ -15,5 +15,7 @@ namespace Business.Abstract
 
         IResult Add(Order order);
 
+        IDataResult<List<UserOrderOrderReportDto>> GetByCustomerId(int customerId);
+
     }
 }

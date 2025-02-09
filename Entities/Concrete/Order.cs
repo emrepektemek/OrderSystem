@@ -15,6 +15,6 @@ namespace Entities.Concrete
         public DateTime OrderDate { get; set; }
         public DateTime? ShipDate { get; set; }
         public string ShippingAddress { get; set; }
-        public bool IsApproved { get; set; }
+        public bool? IsApproved { get; set; }
     }
 }

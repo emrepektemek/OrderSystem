@@ -2,8 +2,10 @@
 using Business.BusinessAspects.Autofac;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
+using Castle.Core.Resource;
 using Core.Aspects.Autofac.Validation;
 using Core.Entities.Concrete;
+using Core.Utilities.Business;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
@@ -23,7 +25,6 @@ namespace Business.Concrete
         IUserService _userService;  
         IUserOperationClaimService _userOperationClaimService; 
 
-
         public CustomerManager(ICustomerDal customerDal, 
             IUserService userService, 
             IUserOperationClaimService userOperationClaimService)
@@ -38,30 +39,10 @@ namespace Business.Concrete
         public IResult Add(Customer customer)
         {
 
-            var userToCheck = _userService.GetByMail(customer.Email);
-
-            if (userToCheck == null)
-            {
-                return new ErrorResult(Messages.UserNotFound);
-            }
-
-            var userExists = UserExists(customer.Email);
-
-            if (!userExists.Success)
-            {
-                return new ErrorResult(userExists.Message);
-            }
-
-            int id = _userOperationClaimService.GetUserOperatinClaimId(customer.UserId); 
-
-            if(id == 0)
-            {
-                return new ErrorResult(Messages.UserNotFound);  
-            }
-            else if (id != 4)
-            {
-                return new ErrorResult(Messages.userClaimIdNotUser);
-            }
+            IResult result = BusinessRules.Run(
+                CheckIfUserExists(customer.Email),
+                CheckIfCustomerExists(customer.Email),
+                CheckIfAccountUser(customer.UserId));
 
 
             var customerObject = new Customer
@@ -88,23 +69,55 @@ namespace Business.Concrete
 
 
         [SecuredOperation("admin,customer.representative")]
-        public IResult UserExists(string email)
+        public IResult CheckIfUserExists(string email)
         {
-           if(GetByMail(email) != null)
-           {
+
+            var result = _userService.GetByMail(email);
+
+            if (result == null)
+            {
+                return new ErrorResult(Messages.UserNotFound);
+            }
+
+            return new SuccessResult();
+
+        }
+
+
+        [SecuredOperation("admin,customer.representative")]
+        public IResult CheckIfCustomerExists(string email)
+        {
+          
+            var result = _customerDal.Get(u => u.Email == email);
+
+            if (result != null)
+            {
                 return new ErrorResult(Messages.CustomerAlreadyExists);
-           }
+            }
 
             return new SuccessResult();
 
         }
 
         [SecuredOperation("admin,customer.representative")]
-        public Customer GetByMail(string email)
+        public IResult CheckIfAccountUser(int userId)
         {
-            return _customerDal.Get(u => u.Email == email);
+            int id = _userOperationClaimService.GetUserOperatinClaimId(userId);
+
+            if (id == 0)
+            {
+                return new ErrorResult(Messages.UserNotFound);
+            }
+            else if (id != 4)
+            {
+                return new ErrorResult(Messages.userClaimIdNotUser);
+            }
+
+            return new SuccessResult();
 
         }
+
+
 
     }
 }

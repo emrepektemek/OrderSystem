@@ -1,5 +1,7 @@
 ﻿using Business.Abstract;
+using Core.Entities.Concrete;
 using Entities.Concrete;
+using Entities.DTOs;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers
@@ -13,6 +15,20 @@ namespace WebAPI.Controllers
         public OrdersController(IOrderService orderService)
         {
             _orderService = orderService;
+        }
+
+        [HttpGet("getapproves")]
+        public IActionResult GetOrderApproves()
+        {
+            var result = _orderService.GetOrderApproves();
+
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+
+            return BadRequest(result);
+
         }
 
 
@@ -49,6 +65,22 @@ namespace WebAPI.Controllers
         public IActionResult Add(Order order)
         {
             var result = _orderService.Add(order);
+
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+
+            return BadRequest(result);
+
+        }
+
+
+        [HttpPost("reject")]
+        public ActionResult Approve(OrderUpdateApproveRejectDto orderUpdateApproveRejectDto)
+        {
+
+            var result = _orderService.UpdateIsApprovedFalse(orderUpdateApproveRejectDto);    
 
             if (result.Success)
             {

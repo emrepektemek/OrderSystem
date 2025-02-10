@@ -17,5 +17,9 @@ namespace Business.Abstract
 
         IDataResult<List<UserOrderOrderReportDto>> GetByCustomerId(int customerId);
 
+        IDataResult<List<OrderApproveDto>> GetOrderApproves();
+
+        IResult UpdateIsApprovedFalse(OrderUpdateApproveRejectDto orderUpdateApproveRejectDto);
+
     }
 }

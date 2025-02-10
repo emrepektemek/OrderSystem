@@ -62,6 +62,25 @@ namespace Business.Concrete
             return new SuccessDataResult<List<UserOrderOrderReportDto>>(_orderDal.GetUserOrderReports(customerId));
         }
 
+        [SecuredOperation("admin,customer.representative")]
+        public IDataResult<List<OrderApproveDto>> GetOrderApproves()
+        {
+            return new SuccessDataResult<List<OrderApproveDto>>(_orderDal.GetOrderApproves());
+        }
+
+        [SecuredOperation("admin,customer.representative")]
+        public IResult UpdateIsApprovedFalse(OrderUpdateApproveRejectDto orderUpdateApproveRejectDto)
+        {
+            var updatedOrder = _orderDal.UpdateIsApprovedFalse(orderUpdateApproveRejectDto);
+
+            if(updatedOrder != null)
+            {                
+             return new SuccessResult(Messages.OrderIsApprovedRejected);
+            }
+
+            return new ErrorResult(Messages.OrderNotExist);
+           
+        }
     }
 
 }

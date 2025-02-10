@@ -1,4 +1,5 @@
 ﻿using Core.DataAccess;
+using Core.Utilities.Results;
 using Entities.Concrete;
 using Entities.DTOs;
 using System;
@@ -14,5 +15,9 @@ namespace DataAccess.Abstract
         List<OrderReportDto> GetOrderReports();
 
         List<UserOrderOrderReportDto> GetUserOrderReports(int customerId);
+
+        List<OrderApproveDto> GetOrderApproves();
+
+        Order UpdateIsApprovedFalse(OrderUpdateApproveRejectDto orderUpdateApproveRejectDto);
     }
 }

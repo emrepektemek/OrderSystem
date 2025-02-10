@@ -15,6 +15,6 @@ namespace Entities.DTOs
         public decimal UnitPrice { get; set; }
         public DateTime OrderDate { get; set; }
         public DateTime? ShipDate { get; set; }
-        public bool IsApproved { get; set; }
+        public bool? IsApproved { get; set; }
     }
 }

@@ -154,6 +154,31 @@ namespace DataAccess.Concrete.EntityFramework
             }
           
         }
+
+        public Order UpdateIsApprovedTrue(OrderUpdateApproveAcceptDto orderUpdateApproveAcceptDto)
+        {
+
+            using (var context = new OrderSystemContext())
+            {
+                var order = context.Orders.Find(orderUpdateApproveAcceptDto.Id);
+
+                if (order == null)
+                {
+
+                    return null;
+
+                }
+
+                order.IsApproved = orderUpdateApproveAcceptDto.IsApproved;
+                order.LastUpdatedUserId = orderUpdateApproveAcceptDto.LastUpdatedUserId;
+                order.LastUpdatedDate = DateTime.Now;
+
+                context.SaveChanges();
+
+                return order;
+
+            }
+        }
     }
 }
 

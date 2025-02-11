@@ -77,10 +77,27 @@ namespace WebAPI.Controllers
 
 
         [HttpPost("reject")]
-        public ActionResult Approve(OrderUpdateApproveRejectDto orderUpdateApproveRejectDto)
+        public ActionResult ApproveReject(OrderUpdateApproveRejectDto orderUpdateApproveRejectDto)
         {
 
             var result = _orderService.UpdateIsApprovedFalse(orderUpdateApproveRejectDto);    
+
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+
+            return BadRequest(result);
+
+        }
+
+
+
+        [HttpPost("accept")]
+        public ActionResult ApproveAccept(OrderUpdateApproveAcceptDto orderUpdateApproveAcceptDto)
+        {
+
+            var result = _orderService.UpdateIsApprovedTrue(orderUpdateApproveAcceptDto);
 
             if (result.Success)
             {

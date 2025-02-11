@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace Business.ValidationRules.FluentValidation
 {
-    public class OrderValidator : AbstractValidator<Order>
+    public class OrderAddValidator : AbstractValidator<Order>
     {
-        public OrderValidator()
+        public OrderAddValidator()
         {
             RuleFor(x => x.ProductId).NotEmpty().WithMessage("Product is required.");
 

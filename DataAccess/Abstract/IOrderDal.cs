@@ -19,5 +19,7 @@ namespace DataAccess.Abstract
         List<OrderApproveDto> GetOrderApproves();
 
         Order UpdateIsApprovedFalse(OrderUpdateApproveRejectDto orderUpdateApproveRejectDto);
+
+        Order UpdateIsApprovedTrue(OrderUpdateApproveAcceptDto orderUpdateApproveAcceptDto);
     }
 }

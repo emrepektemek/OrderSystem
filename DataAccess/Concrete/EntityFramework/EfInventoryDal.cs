@@ -29,8 +29,10 @@ namespace DataAccess.Concrete.EntityFramework
                              select new InventoryReportDto
                              {
                                  InventoryId = i.Id,
+                                 WarehouseId = w.Id,    
                                  WarehouseName = w.WarehouseName,
                                  WarehouseLocation = w.Location,
+                                 ProductId = p.Id,
                                  ProductName = p.ProductName,
                                  StockQuantity = i.StockQuantity,                   
                              };
@@ -39,8 +41,23 @@ namespace DataAccess.Concrete.EntityFramework
 
             }
 
-
-
         }
+
+        public Inventory InvetoryStockQuantityReduce(int warehouseId, int productId, int quantity)
+        {
+            using (OrderSystemContext context = new OrderSystemContext())
+            {
+                var inventory = context.Inventories
+                    .FirstOrDefault(i => i.WarehouseId == warehouseId && i.ProductId == productId);
+            
+                inventory.StockQuantity -= quantity;
+
+                context.SaveChanges();
+
+                return inventory;
+            }
+        }
+
+      
     }
 }

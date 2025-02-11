@@ -21,5 +21,7 @@ namespace Business.Abstract
 
         IResult UpdateIsApprovedFalse(OrderUpdateApproveRejectDto orderUpdateApproveRejectDto);
 
+        IResult UpdateIsApprovedTrue(OrderUpdateApproveAcceptDto orderUpdateApproveAcceptDto);
+
     }
 }

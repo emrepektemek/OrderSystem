@@ -12,5 +12,7 @@ namespace DataAccess.Abstract
     public interface IInventoryDal : IEntityRepository<Inventory>
     {
         List<InventoryReportDto> GetInventoryReports();
+
+        Inventory InvetoryStockQuantityReduce(int warehouseId, int productId, int quantity);
     }
 }
